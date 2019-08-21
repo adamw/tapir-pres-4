@@ -1,8 +1,25 @@
 package com.softwaremill.demo
 
+import cats.effect.IO
+import org.http4s.EntityBody
+import tapir._
+import tapir.model.MultiQueryParams
+
 class S360_Back_door {
-/*
-A generic endpoint
-Just in case our data structures and API isn't rich enough
- */
+  // A generic endpoint: just in case our data structures and API isn't rich enough
+
+  val anyEndpoint: Endpoint[
+    (Seq[(String, String)], MultiQueryParams, Seq[String], EntityBody[IO]),
+    (Seq[(String, String)], Array[Byte]),
+    (Seq[(String, String)], EntityBody[IO]),
+    EntityBody[IO]
+  ] = endpoint
+    .in(headers)
+    .in(queryParams)
+    .in(paths)
+    .in(streamBody[EntityBody[IO]](Schema.SBinary, MediaType.OctetStream()))
+    .errorOut(headers)
+    .errorOut(binaryBody[Array[Byte]])
+    .out(headers)
+    .out(streamBody[EntityBody[IO]](Schema.SBinary, MediaType.OctetStream()))
 }
