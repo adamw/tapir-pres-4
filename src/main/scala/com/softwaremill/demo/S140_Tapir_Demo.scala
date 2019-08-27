@@ -12,6 +12,7 @@ object S140_Tapir_Demo extends App {
 
   import tapir._
 
+  // GET /books?year=...&limit=... (parameters optional) -> json list of books
   val getBooksEndpoint: Endpoint[(Option[Int], Option[Int]), String, List[Book], Nothing] = endpoint.get
     .in("books")
     .in(query[Option[Int]]("year"))
@@ -19,9 +20,10 @@ object S140_Tapir_Demo extends App {
     .errorOut(stringBody)
     .out(jsonBody[List[Book]])
 
+  // GET /book/c5e41285-a229-419a-93f3-1a834842b352 -> json book
   val getBookEndpoint: Endpoint[UUID, String, Book, Nothing] = endpoint.get
     .in("books")
-    .errorOut(stringBody)
     .in(path[UUID]("bookId"))
+    .errorOut(stringBody)
     .out(jsonBody[Book].example(exampleBook))
 }

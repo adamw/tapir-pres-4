@@ -43,8 +43,8 @@ object S180_Tapir_Demo extends App {
   // GET /book/c5e41285-a229-419a-93f3-1a834842b352 -> json book
   val getBookEndpoint = endpoint.get
     .in("books")
-    .errorOut(stringBody)
     .in(path[UUID]("bookId"))
+    .errorOut(stringBody)
     .out(jsonBody[Book].example(books.head))
 
   //
