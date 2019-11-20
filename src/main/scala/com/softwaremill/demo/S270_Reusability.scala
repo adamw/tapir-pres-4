@@ -3,10 +3,10 @@ package com.softwaremill.demo
 import java.util.UUID
 
 import com.softwaremill.demo.S140_Tapir_Demo.Book
-import tapir._
-import tapir.model.StatusCode
-import tapir.json.circe._
+import sttp.tapir._
+import sttp.tapir.json.circe._
 import io.circe.generic.auto._
+import sttp.model.StatusCode
 
 class S270_Reusability {
   // Incremental builder

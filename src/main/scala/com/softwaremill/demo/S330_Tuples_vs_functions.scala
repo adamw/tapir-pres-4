@@ -1,8 +1,8 @@
 package com.softwaremill.demo
 
 import cats.effect.IO
-import com.softwaremill.sttp.HeaderNames
-import tapir._
+import sttp.model.HeaderNames
+import sttp.tapir._
 
 class S330_Tuples_vs_functions {
   val e1: Endpoint[Int, Unit, String, Nothing] = endpoint

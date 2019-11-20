@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-import tapir._
+import sttp.tapir._
 
 class S340_Basic_endpoint {
   // An empty input: () (unit)

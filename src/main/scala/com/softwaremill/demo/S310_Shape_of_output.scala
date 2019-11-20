@@ -1,10 +1,9 @@
 package com.softwaremill.demo
 
-import com.softwaremill.sttp.HeaderNames
-import tapir._
-import tapir.model.StatusCodes
-import tapir.json.circe._
+import sttp.tapir._
+import sttp.tapir.json.circe._
 import io.circe.generic.auto._
+import sttp.model.{HeaderNames, StatusCode}
 
 class S310_Shape_of_output {
   // What's the shape of an output?
@@ -24,9 +23,9 @@ class S310_Shape_of_output {
   case object NoContent extends ErrorInfo
 
   val o3: EndpointOutput[ErrorInfo] = oneOf(
-    statusMapping(StatusCodes.NotFound, jsonBody[NotFound].description("not found")),
-    statusMapping(StatusCodes.Unauthorized, jsonBody[Unauthorized].description("unauthorized")),
-    statusMapping(StatusCodes.NoContent, emptyOutput.map(_ => NoContent)(_ => ())),
+    statusMapping(StatusCode.NotFound, jsonBody[NotFound].description("not found")),
+    statusMapping(StatusCode.Unauthorized, jsonBody[Unauthorized].description("unauthorized")),
+    statusMapping(StatusCode.NoContent, emptyOutput.map(_ => NoContent)(_ => ())),
     statusDefaultMapping(jsonBody[Unknown].description("unknown"))
   )
 

@@ -2,8 +2,8 @@ package com.softwaremill.demo
 
 import doobie.util.Meta
 import io.circe.{Decoder, Encoder}
-import tapir.Codec
-import tapir.Codec.PlainCodec
+import sttp.tapir.Codec
+import sttp.tapir.Codec.PlainCodec
 
 class S370_Codecs {
   // Many libraries need to encode/decode values!

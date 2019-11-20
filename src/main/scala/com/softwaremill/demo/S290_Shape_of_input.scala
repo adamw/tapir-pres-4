@@ -1,7 +1,7 @@
 package com.softwaremill.demo
 
-import com.softwaremill.sttp.HeaderNames
-import tapir._
+import sttp.model.HeaderNames
+import sttp.tapir._
 
 class S290_Shape_of_input {
   // What's the shape of an input?

@@ -3,7 +3,7 @@ package com.softwaremill.demo
 import cats.effect.IO
 import org.http4s.HttpRoutes
 import org.http4s.dsl.io._
-import com.softwaremill.sttp._
+import sttp.client._
 
 class S120_General_problem {
 
@@ -15,7 +15,7 @@ class S120_General_problem {
 
   // client
   val name = "Adam"
-  sttp.get(uri"http://localhost:8080/hello?name=$name")
+  basicRequest.get(uri"http://localhost:8080/hello?name=$name")
 
   // docs
   val yaml = """

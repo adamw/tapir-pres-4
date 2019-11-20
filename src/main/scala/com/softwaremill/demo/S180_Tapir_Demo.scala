@@ -9,9 +9,9 @@ import org.http4s.HttpRoutes
 import org.http4s.server.Router
 import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.syntax.kleisli._
-import tapir.json.circe._
-import tapir.openapi.OpenAPI
-import tapir.swagger.http4s.SwaggerHttp4s
+import sttp.tapir.json.circe._
+import sttp.tapir.openapi.OpenAPI
+import sttp.tapir.swagger.http4s.SwaggerHttp4s
 
 import scala.concurrent.ExecutionContext
 
@@ -30,7 +30,7 @@ object S180_Tapir_Demo extends App {
     Book(UUID.randomUUID(), "Pharaoh", Year(1897))
   )
 
-  import tapir._
+  import sttp.tapir._
 
   // GET /books?year=...&limit=... (parameters optional) -> json list of books
   val getBooksEndpoint: Endpoint[(Option[Int], Option[Int]), String, List[Book], Nothing] = endpoint.get
@@ -49,7 +49,7 @@ object S180_Tapir_Demo extends App {
 
   //
 
-  import tapir.server.http4s._
+  import sttp.tapir.server.http4s._
 
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
   implicit val contextShift: ContextShift[IO] = IO.contextShift(ec)
@@ -71,8 +71,8 @@ object S180_Tapir_Demo extends App {
 
   //
 
-  import tapir.docs.openapi._
-  import tapir.openapi.circe.yaml._
+  import sttp.tapir.docs.openapi._
+  import sttp.tapir.openapi.circe.yaml._
 
   val docs: OpenAPI = List(getBooksEndpoint, getBookEndpoint).toOpenAPI("The tapir library", "1.0")
   val yaml: String = docs.toYaml

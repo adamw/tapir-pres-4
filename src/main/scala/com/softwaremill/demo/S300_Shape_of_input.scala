@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-import tapir.EndpointInput
+import sttp.tapir.EndpointInput
 
 class S300_Shape_of_input {
   // What about coproducts?

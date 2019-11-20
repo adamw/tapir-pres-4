@@ -1,8 +1,8 @@
 package com.softwaremill.demo
 
-import tapir.Codec.PlainCodec
-import tapir.typelevel.ParamConcat
-import tapir.{EndpointIO, EndpointInfo, EndpointInput, EndpointOutput, MediaType}
+import sttp.tapir.Codec.PlainCodec
+import sttp.tapir.typelevel.ParamConcat
+import sttp.tapir.{CodecFormat, EndpointIO, EndpointInfo, EndpointInput, EndpointOutput}
 
 class S160_Capturing_the_structure {
 
@@ -18,7 +18,7 @@ class S160_Capturing_the_structure {
   }
 
   def path[T: PlainCodec]: EndpointInput.PathCapture[T] = ???
-  def stringBody: EndpointIO.Body[String, MediaType.TextPlain, String] = ???
+  def stringBody: EndpointIO.Body[String, CodecFormat.TextPlain, String] = ???
   // ...
 
   // These methods give us nice syntax: that's the API

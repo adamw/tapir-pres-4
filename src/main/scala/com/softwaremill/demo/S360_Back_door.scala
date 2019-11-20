@@ -2,8 +2,8 @@ package com.softwaremill.demo
 
 import cats.effect.IO
 import org.http4s.EntityBody
-import tapir._
-import tapir.model.MultiQueryParams
+import sttp.model.MultiQueryParams
+import sttp.tapir._
 
 class S360_Back_door {
   // A generic endpoint: just in case our data structures and API isn't rich enough
@@ -17,9 +17,9 @@ class S360_Back_door {
     .in(headers)
     .in(queryParams)
     .in(paths)
-    .in(streamBody[EntityBody[IO]](Schema.SBinary, MediaType.OctetStream()))
+    .in(streamBody[EntityBody[IO]](schemaFor[Array[Byte]], CodecFormat.OctetStream()))
     .errorOut(headers)
     .errorOut(binaryBody[Array[Byte]])
     .out(headers)
-    .out(streamBody[EntityBody[IO]](Schema.SBinary, MediaType.OctetStream()))
+    .out(streamBody[EntityBody[IO]](schemaFor[Array[Byte]], CodecFormat.OctetStream()))
 }
