@@ -23,6 +23,15 @@ class S350_Type_safe_header_model {
     val ContentType = "Content-Type"
     // ...
   }
+  object HeaderNames extends HeaderNames
 
-  // Still on the fence
+  // Or:
+  case class Header(name: String, value: String)
+  object Header {
+    def accept(mediaRanges: String): Header = Header(HeaderNames.Accept, mediaRanges)
+    def acceptEncoding(encodingRanges: String): Header = Header(HeaderNames.AcceptEncoding, encodingRanges)
+    def authorization(authType: String, credentials: String): Header = Header(HeaderNames.Authorization, s"$authType $credentials")
+    def contentLength(length: Long): Header = Header(HeaderNames.ContentLength, length.toString)
+    def contentType(mediaType: MediaType): Header = Header(HeaderNames.ContentType, mediaType.toString)
+  }
 }

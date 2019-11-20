@@ -3,7 +3,7 @@ package com.softwaremill.demo
 class S250_Goals_of_the_api {
   val _1 = "type-safe"
 
-  val _2 = "re-usable"
+  val _2 = "re-usable values"
 
   val _3 = "programmer-friendly types"
   val _3_1 = "not afraid to write down"

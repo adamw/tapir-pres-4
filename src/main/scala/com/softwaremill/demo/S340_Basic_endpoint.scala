@@ -16,7 +16,7 @@ class S340_Basic_endpoint {
   // symmetric :)
 
   // Should there be no errors by default?
-  val e1: Endpoint[Unit, Nothing, Unit, Nothing] = ???
+  val e1: Endpoint[Unit, Nothing, Unit, Nothing] = infallibleEndpoint
   // but ... you can always get a 500 Internal Server Error for client calls
 
   // What about?
