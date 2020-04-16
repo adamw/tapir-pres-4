@@ -6,7 +6,7 @@ import javax.ws.rs.{GET, Path, PathParam, Produces}
 import javax.ws.rs.core.MediaType
 import javax.xml.bind.annotation.XmlRootElement
 
-class S110_Current_state_java {
+object S110_Current_state_java {
   @XmlRootElement
   class Book(title: String)
 

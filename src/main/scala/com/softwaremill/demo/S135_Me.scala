@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-class S135_Me {
+object S135_Me {
   // 14 years of creating HTTP APIs and counting ;)
   // J2EE, JBoss Seam, Spring, Lift, spray/akka-http, http4s
 

@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-class S270_Gains_and_losses {
+object S270_Gains_and_losses {
   def gains(): List[String] = List(
     "abstraction",
     "flexibility",
