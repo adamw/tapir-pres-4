@@ -47,15 +47,6 @@ object S160_Tapir_Demo extends App {
   import Endpoints._
   import akka.http.scaladsl.server.Route
 
-  def openapiYamlDocumentation: String = {
-    import sttp.tapir.docs.openapi._
-    import sttp.tapir.openapi.circe.yaml._
-
-    // interpreting the endpoint description to generate yaml openapi documentation
-    val docs = List(addBook, booksListing).toOpenAPI("Books I've read", "1.0")
-    docs.toYaml
-  }
-
   def booksRoutes: Route = {
     import akka.http.scaladsl.server.Directives._
     import sttp.tapir.server.akkahttp._
@@ -89,7 +80,16 @@ object S160_Tapir_Demo extends App {
     addBook.toRoute((bookAddLogic _).tupled) ~ booksListing.toRoute((bookListingLogic _).tupled)
   }
 
-  def startServer(route: Route, yaml: String): Unit = {
+  def openapiYamlDocumentation: String = {
+    import sttp.tapir.docs.openapi._
+    import sttp.tapir.openapi.circe.yaml._
+
+    // interpreting the endpoint description to generate yaml openapi documentation
+    val docs = List(addBook, booksListing).toOpenAPI("Books I've read", "1.0")
+    docs.toYaml
+  }
+
+  def startServer(): Unit = {
     import akka.actor.ActorSystem
     import akka.http.scaladsl.Http
     import akka.http.scaladsl.server.Directives._
@@ -98,7 +98,7 @@ object S160_Tapir_Demo extends App {
     import scala.concurrent.Await
     import scala.concurrent.duration._
 
-    val routes = route ~ new SwaggerAkka(yaml).routes
+    val routes = booksRoutes ~ new SwaggerAkka(openapiYamlDocumentation).routes
     implicit val actorSystem: ActorSystem = ActorSystem()
 
     Await.result(Http().bindAndHandle(routes, "localhost", 8080), 1.minute)
@@ -118,7 +118,7 @@ object S160_Tapir_Demo extends App {
     println("Client call result: " + result)
   }
 
-  startServer(booksRoutes, openapiYamlDocumentation)
+  startServer()
   makeClientRequest()
   println("Try out the API by opening the Swagger UI: http://localhost:8080/docs")
 }
