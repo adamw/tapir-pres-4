@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-object S140_Tapir_Demo extends App {
+object S160_Tapir_Demo extends App {
   case class Book(title: String, year: Int)
 
   var books = List(

@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-object S190_Where_is_FP {
+object S170_Where_is_FP {
   /**
     * Separate problem description & interpretation
     *

@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-object S390_Summary {
+object S190_Summary {
   def _1: String = "Type-safe description of HTTP endpoints"
 
   def _2: String = "The tapir API gives nice syntax to create the data structure"
