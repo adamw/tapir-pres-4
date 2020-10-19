@@ -19,10 +19,10 @@ object S160_Tapir_Demo extends App {
     import sttp.tapir.json.circe._
 
     // All endpoints report errors as strings, and have the common path prefix '/books'
-    val baseEndpoint: Endpoint[Unit, String, Unit, Nothing] = endpoint.errorOut(stringBody).in("books")
+    val baseEndpoint: Endpoint[Unit, String, Unit, Any] = endpoint.errorOut(stringBody).in("books")
 
     // POST /books
-    val addBook: Endpoint[(Book, String), String, Unit, Nothing] = baseEndpoint.post
+    val addBook: Endpoint[(Book, String), String, Unit, Any] = baseEndpoint.post
       .in("add")
       .in(
         jsonBody[Book]
@@ -36,7 +36,7 @@ object S160_Tapir_Demo extends App {
     val limitParameter: EndpointInput[Option[Int]] = query[Option[Int]]("limit").description("Maximum number of books to retrieve")
 
     // GET /books
-    val booksListing: Endpoint[(Option[Int], Option[Int]), String, List[Book], Nothing] = baseEndpoint.get
+    val booksListing: Endpoint[(Option[Int], Option[Int]), String, List[Book], Any] = baseEndpoint.get
       .in(yearParameter)
       .in(limitParameter)
       .out(jsonBody[List[Book]])
@@ -101,20 +101,20 @@ object S160_Tapir_Demo extends App {
     val routes = booksRoutes ~ new SwaggerAkka(openapiYamlDocumentation).routes
     implicit val actorSystem: ActorSystem = ActorSystem()
 
-    Await.result(Http().bindAndHandle(routes, "localhost", 8080), 1.minute)
+    Await.result(Http().newServerAt("localhost", 8080).bind(routes), 1.minute)
   }
 
   def makeClientRequest(): Unit = {
-    import sttp.client._
+    import sttp.client3._
     import sttp.tapir.client.sttp._
 
-    implicit val backend: SttpBackend[Identity, Nothing, NothingT] = HttpURLConnectionBackend()
+    val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
 
-    val booksListingRequest: Request[Either[String, List[Book]], Nothing] = booksListing
+    val booksListingRequest: Request[Either[String, List[Book]], Any] = booksListing
       .toSttpRequestUnsafe(uri"http://localhost:8080")
       .apply(None, Option(3))
 
-    val result: Either[String, List[Book]] = booksListingRequest.send().body
+    val result: Either[String, List[Book]] = booksListingRequest.send(backend).body
     println("Client call result: " + result)
   }
 

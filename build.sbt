@@ -3,9 +3,9 @@ import Keys._
 
 name := "tapir-pres-4"
 organization := "com.softwaremill"
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.3"
 
-val tapirVersion = "0.13.2"
+val tapirVersion = "0.17.0-M2"
 
 libraryDependencies ++= Seq(
   "com.softwaremill.sttp.tapir" %% "tapir-core" % tapirVersion,
@@ -20,9 +20,9 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-core" % "1.2.3",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
   "javax.ws.rs" % "javax.ws.rs-api" % "2.1.1",
-  "javax.xml.bind" % "jaxb-api" % "2.3.0",
-  "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11",
-  "org.http4s" %% "http4s-circe" % "0.21.3"
+  "javax.xml.bind" % "jaxb-api" % "2.3.1",
+  "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.1",
+  "org.http4s" %% "http4s-circe" % "0.21.8"
 )
 
 commonSmlBuildSettings
