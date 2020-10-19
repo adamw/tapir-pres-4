@@ -1,6 +1,6 @@
 package com.softwaremill.demo
 
-object S140_General_idea {
+object S120_General_idea {
   // Our programming languages are really good at manipulating data
   def _1: String = "Describe the endpoint using a data structure"
 

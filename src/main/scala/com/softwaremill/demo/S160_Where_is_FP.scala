@@ -1,8 +1,8 @@
 package com.softwaremill.demo
 
-object S170_Where_is_FP {
-  /**
-    * Separate problem description & interpretation
+object S160_Where_is_FP {
+
+  /** Separate problem description & interpretation
     *
     * 1. data structures
     * 2. functions manipulating these data structures (tapir API, interpreters)

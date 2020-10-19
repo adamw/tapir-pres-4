@@ -1,7 +1,7 @@
 package com.softwaremill.demo
 
-object S150_Me {
-  // 14 years of creating HTTP APIs and counting ;)
+object S130_Me {
+  // 15 years of creating HTTP APIs and counting ;)
   // J2EE, JBoss Seam, Spring, Lift, spray/akka-http, http4s
 
   // coder @ [SoftwareMill](http://www.softwaremill.com)
