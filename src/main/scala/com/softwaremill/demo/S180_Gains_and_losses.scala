@@ -12,7 +12,7 @@ object S180_Gains_and_losses {
   def losses(): List[String] = List(
     "the tapir API isn't yet complete",
     "filters / middleware",
-    "websockets / file serving"
+    "file serving"
   )
 
   def goals(): List[String] = List(

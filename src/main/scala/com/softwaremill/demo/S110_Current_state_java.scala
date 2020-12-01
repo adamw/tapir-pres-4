@@ -13,5 +13,5 @@ object S110_Current_state_java {
   @GET
   @Path("/books/{id}")
   @Produces(Array(MediaType.APPLICATION_JSON))
-  def getBookById[F[_]](@PathParam("id") id: UUID): Book = new Book("The Trial")
+  def getBookById(@PathParam("id") id: UUID): Book = new Book("The Trial")
 }

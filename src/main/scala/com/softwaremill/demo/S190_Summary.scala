@@ -5,7 +5,7 @@ object S190_Summary {
 
   def _2: String = "The tapir API gives nice syntax to create the data structure"
 
-  def _3: String = "Multiple interpreters: server, client documentation"
+  def _3: String = "Multiple interpreters: server, client, documentation"
 
   def _4: String = "General technique: separate description from interpretation"
 
