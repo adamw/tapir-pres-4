@@ -16,6 +16,7 @@ object S160_Tapir_Demo extends App {
   object Endpoints {
     import io.circe.generic.auto._
     import sttp.tapir._
+    import sttp.tapir.generic.auto._
     import sttp.tapir.json.circe._
 
     // All endpoints report errors as strings, and have the common path prefix '/books'
@@ -48,7 +49,6 @@ object S160_Tapir_Demo extends App {
   import akka.http.scaladsl.server.Route
 
   def booksRoutes: Route = {
-    import akka.http.scaladsl.server.Directives._
     import sttp.tapir.server.akkahttp._
 
     import scala.concurrent.ExecutionContext.Implicits.global
@@ -77,7 +77,9 @@ object S160_Tapir_Demo extends App {
 
     // interpreting the endpoint description and converting it to an akka-http route, providing the logic which
     // should be run when the endpoint is invoked.
-    addBook.toRoute((bookAddLogic _).tupled) ~ booksListing.toRoute((bookListingLogic _).tupled)
+    AkkaHttpServerInterpreter.toRoute(
+      List(addBook.serverLogic((bookAddLogic _).tupled), booksListing.serverLogic((bookListingLogic _).tupled))
+    )
   }
 
   def openapiYamlDocumentation: String = {
@@ -85,7 +87,7 @@ object S160_Tapir_Demo extends App {
     import sttp.tapir.openapi.circe.yaml._
 
     // interpreting the endpoint description to generate yaml openapi documentation
-    val docs = List(addBook, booksListing).toOpenAPI("Books I've read", "1.0")
+    val docs = OpenAPIDocsInterpreter.toOpenAPI(List(addBook, booksListing), "Books I've read", "1.0")
     docs.toYaml
   }
 
@@ -110,9 +112,9 @@ object S160_Tapir_Demo extends App {
 
     val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
 
-    val booksListingRequest: Request[Either[String, List[Book]], Any] = booksListing
-      .toSttpRequestUnsafe(uri"http://localhost:8080")
-      .apply(None, Option(3))
+    val booksListingRequest: Request[Either[String, List[Book]], Any] = SttpClientInterpreter
+      .toRequestThrowDecodeFailures(booksListing, Some(uri"http://localhost:8080"))
+      .apply((None, Option(3)))
 
     val result: Either[String, List[Book]] = booksListingRequest.send(backend).body
     println("Client call result: " + result)

@@ -14,6 +14,7 @@ object S190_Summary {
   - [this presentation](https://github.com/adamw/tapir-pres-4)
   - [tapir](https://github.com/softwaremill/tapir)
   - [Scala Times](http://scalatimes.com)
+  - [@adamwarski](https://twitter.com/adamwarski)
    */
 
   val ThankYou = true
