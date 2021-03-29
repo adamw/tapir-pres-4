@@ -21,7 +21,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
   "javax.ws.rs" % "javax.ws.rs-api" % "2.1.1",
   "javax.xml.bind" % "jaxb-api" % "2.3.1",
-  "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.1",
   "org.http4s" %% "http4s-circe" % "0.21.20"
 )
 
